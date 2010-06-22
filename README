@@ -1,0 +1,17 @@
+RailroadMap
+===========
+
+This plugin generates documents of your application.
+It's different from RDoc that the documents will be generated from real class information, not source codes.
+Also this plugin aims to discribe the structure of your web application with MVC understanding.
+
+But now, it can just simply list up the actions in your controllers.
+
+To generate documents, rum the following rake task.
+
+ > rake railroad_map
+
+Then you can find the generated documents in doc/railroad_map.
+
+=======
+Copyright (c) 2010 Yasuko Ohba, released under the MIT license
