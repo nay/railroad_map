@@ -35,7 +35,7 @@ namespace :railroad_map do
         file.write("<h1>#{c.to_s}</h1>\n")
         # get filter_names
         before_filters = c.filter_chain.find_all{|f| f.kind_of?(ActionController::Filters::BeforeFilter) && f.method.kind_of?(Symbol)}
-        partial_filters = before_filters.find_all{|f| f.options[:only] || f.options[:exclude]}
+        partial_filters = before_filters.find_all{|f| f.options[:only] || f.options[:except]}
         general_filters = before_filters - partial_filters
         file.write("<h2>General Before Filters</h2>\n")
         file.write("<ul>\n")
@@ -59,7 +59,7 @@ namespace :railroad_map do
           file.write("<tr>\n")
           file.write("<th>#{a}</th>")
           partial_filters.each do |f|
-            applied = (f.options[:only] && f.options[:only].include?(a.to_s)) || (f.options[:exclude] && !f.options[:exclude].include?(a.to_s))
+            applied = (f.options[:only] && f.options[:only].include?(a.to_s)) || (f.options[:except] && !f.options[:except].include?(a.to_s))
             file.write("<td class='#{applied ? 'applied' : 'notApplied'}'  style='width:100px;'>#{applied ? 'applied' : '-'}</td>")
           end
           file.write("\n")
