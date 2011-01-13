@@ -35,7 +35,7 @@ namespace :railroad_map do
         file.write("<h1>#{c.to_s}</h1>\n")
         file.write("<h2>Actions</h2>\n")
         file.write("<ul>\n")
-        c.action_methods.each do |a|
+        c.action_methods.sort.each do |a|
           file.write("<li>#{a}</li>\n")
         end
         file.write("</ul>\n")
