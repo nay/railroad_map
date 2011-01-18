@@ -17,6 +17,8 @@ namespace :railroad_map do
       path=~/app\/controllers\/(.*)\.rb$/
       $1.classify.constantize
     }
+    controllers.uniq!
+    controllers.sort!{|a, b| a.name <=> b.name}
 
     # remove super classes
     super_controllers = controllers.inject([]) { |list, c| list << c.superclass }
