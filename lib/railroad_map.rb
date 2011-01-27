@@ -148,8 +148,24 @@ module RailroadMap
 
   end
 
+  class ControllerSummary
+    attr_accessor :controller
+  end
+
+  class ControllerActionCount < ControllerSummary
+    def write_header_to(out)
+      out.write("<th>Action Counts</th>")
+    end
+
+    def write_contents_to(out)
+      out.write("<td class='number'>#{controller.action_methods.size}</td>")
+    end
+  end
+
+
   CONTROLLER_DETAILS = [ControllerGeneralBeforeFilters, ControllerActions]
   ACTION_INFO = [ActionName, ActionImplementedIn, ActionPartialFilters]
+  CONTROLLER_SUMMARIES = [ControllerActionCount]
 
   # You can override these
   def self.controller_details
@@ -158,5 +174,9 @@ module RailroadMap
 
   def self.action_attributes
     ACTION_INFO.map{|clazz| clazz.new}
+  end
+
+  def self.controller_summaries
+    CONTROLLER_SUMMARIES.map{|clazz| clazz.new}
   end
 end
